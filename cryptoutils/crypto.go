@@ -8,10 +8,15 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
+	"errors"
 )
 
 // 使用aes算法,加密指定内容
 func EncryptAes(rawData, key []byte) ([]byte, error) {
+	if (len(rawData) == 0) || (len(key) == 0) {
+		return nil, errors.New("encrypt data or secret key is empty")
+	}
+
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
@@ -29,6 +34,10 @@ func EncryptAes(rawData, key []byte) ([]byte, error) {
 
 // 使用aes算法,解密指定内容
 func DecryptAes(cryptData, key []byte) ([]byte, error) {
+	if (len(cryptData) == 0) || (len(key) == 0) {
+		return nil, errors.New("decrypt data or secret key is empty")
+	}
+
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
