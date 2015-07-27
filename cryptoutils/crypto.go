@@ -9,6 +9,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"errors"
+	"log"
 )
 
 // 使用aes算法,加密指定内容
@@ -50,6 +51,12 @@ func DecryptAes(cryptData, key []byte) ([]byte, error) {
 	blockMode.CryptBlocks(rawData, cryptData)
 
 	unpadding := int(rawData[len(rawData)-1])
-	rawData = rawData[:(len(rawData) - unpadding)]
+
+	if len(rawData) > unpadding {
+		rawData = rawData[:(len(rawData) - unpadding)]
+	} else {
+		return nil, errors.New("decrypt raw data error, key is correct?")
+	}
+
 	return rawData, nil
 }
