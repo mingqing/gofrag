@@ -9,7 +9,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"errors"
-	"log"
 )
 
 // 使用aes算法,加密指定内容
