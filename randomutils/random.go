@@ -9,7 +9,7 @@ import (
 func LettersDigits(length int) string {
 	rand.Seed(time.Now().UnixNano())
 
-	result := make([]byte, length)
+	var result []byte
 
 	for i := 0; i < length; i++ {
 		keyType := rand.Intn(3)
